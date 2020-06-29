@@ -5,11 +5,12 @@ from security import authenticate, identity
 from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store,StoreList
+import os
 
 
 app = Flask(__name__)
 app.secret_key = "12345"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testdb.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///testdb.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
 
